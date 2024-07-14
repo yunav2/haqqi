@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Page Login</title>
+</head>
+<body>
+    
+    <div class="register-card">
+        <h1>Hello Friend !</h1>
+        <h3>Enter you credentials</h3>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <script type="text/javascript">
+                const button = document.querySelector('#button');
+                Swal.fire({
+                    text: '{{ message }}',
+                    icon: '{{ category }}',
+                    confirmButtonText: 'Ok'
+                  })
+            </script>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+            <form class="register-form" method="post" action="{{ url_for('register') }}"> 
+                <input type="email" placeholder="Email" id="email" name="email">
+                <input type="username" placeholder="Username" id="username" name="username">
+                <input type="password" placeholder="Password" id="password" name="password">
+                <input type="no_handphone" placeholder="No Handphone" id="no_handphone" name="no_handphone">
+                <a href="{{ url_for('login') }}">have an account ?</a>
+                <button type="submit" value="Alert" id="button">Sign Up</button>
+            </form>
+    </div>
+</body>
+</html>
